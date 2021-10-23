@@ -5,7 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Jobs extends Model
+class Availability extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'job_id',
+        'user_id',
+        'time_in',
+        'time_out'
+    ];
 }

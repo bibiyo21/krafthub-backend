@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class UserInformation extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "user_id",
+        "credential_title",
+        "credential_description",
+        "is_file"
+    ];
 }

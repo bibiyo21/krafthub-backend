@@ -17,7 +17,7 @@ class CreateUserInformationTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('credential_title');
-            $table->string('credential_description');
+            $table->longText('credential_description');
             $table->string('is_file');
             $table->timestamps();
         });

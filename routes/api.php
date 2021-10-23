@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\UserInformationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,4 +35,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('availability', [AvailabilityController::class, 'create']);
     Route::put('availability', [AvailabilityController::class, 'update']);
+    Route::post('user-info', [UserInformationController::class, 'addInfo']);
+    Route::get('user/{userId}', [UserInformationController::class, 'getUserInfo']);
+    Route::post('user-info/{userInfoId}', [UserInformationController::class, 'patchInfo']);
+    Route::delete('user-info/{userInfoId}', [UserInformationController::class, 'deleteInfo']);
 });

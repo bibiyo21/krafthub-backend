@@ -23,18 +23,15 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::get('job-types', [JobController::class, 'getJobTypes']);
 Route::get('job-types/{type}', [JobController::class, 'getJobByType']);
-
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::get('availabilities', [AvailabilityController::class, 'jobUsers']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('user', function (Request $request) {
         return $request->user();
     });
     Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('availability', [AvailabilityController::class, 'create']);
-    Route::put('availability', [AvailabilityController::class, 'update']);
+    Route::post('availabilites', [AvailabilityController::class, 'create']);
+    Route::put('availabilities', [AvailabilityController::class, 'update']);
     Route::post('user-info', [UserInformationController::class, 'addInfo']);
     Route::get('user/{userId}', [UserInformationController::class, 'getUserInfo']);
     Route::post('user-info/{userInfoId}', [UserInformationController::class, 'patchInfo']);

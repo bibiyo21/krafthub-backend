@@ -12,31 +12,31 @@ class AuthController extends Controller
     public function register(Request $request) 
     {
         $request->validate([
-            "agree" => "required",
+            "agreement" => "accepted",
             "first_name" => "required|string",
             "last_name" => "required|string",
             "email"=> "required|string|email|unique:users,email",
             "password" => "required|string|confirmed",
             'cellphone_number' => "required|string",
             'house_info'=> "required|string",
-            'street_name'=> "required|string",
-            'barangay'=> "required|string",
-            'city'=> "required|string",
+            // 'street_name'=> "required|string",
+            // 'barangay'=> "required|string",
+            // 'city'=> "required|string",
             'zipcode'=> "required|string",
         ]);
 
         $user = User::create([
             "first_name" => $request->input('first_name'),
-            "last_name" => $request->input('password'),
+            "last_name" => $request->input('last_name'),
             "middle_name" => $request->input('middle_name'),
             "phone_number" => $request->input('phone_number'),
             "cellphone_number" => $request->input('cellphone_number'),
             "house_info" => $request->input('house_info'),
-            "street_name" => $request->input('street_name'),
-            "barangay" => $request->input('barangay'),
-            "city" => $request->input('city'),
-            "zipcode" => $request->input('zipcode'),
-            "email" => $request->input('email'),
+            "street_name" => $request->input('street_name', ''),
+            "barangay" => $request->input('barangay', ''),
+            "city" => $request->input('city', ''),
+            "zipcode" => $request->input('zipcode', ''),
+            "email" => $request->input('email', ''),
             "password" => bcrypt($request->input('password'))
         ]);
 

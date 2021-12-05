@@ -76,7 +76,7 @@ class AvailabilityController extends Controller
         }
 
         if ($request->has('jobId') && $request->filled('jobId')) {
-            $users->where('parent_id', '=', $request->get('jobId'));
+            $users->where('jobs.parent_id', '=', $request->get('jobId'));
         }
 
         if ($request->has('jobType') && $request->filled('jobType')) {

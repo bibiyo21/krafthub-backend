@@ -61,21 +61,46 @@ class AvailabilityController extends Controller
             ->join('users', 'users.id', '=','availabilities.user_id')
             ->join('jobs', 'jobs.id', '=','availabilities.job_id')
             ->join('jobs as jobs_parent', 'jobs.parent_id', '=','jobs_parent.id');
+        
+// dd(session('users'));
+//         if (auth()->check()) {
+//             // dd('wew');
+//             $users->where('availabilities.user_id', '!=', auth()->user()->id);
+//         }
 
-        // if ($request->has('user_name') && $request->filled('user_name')) {
-        //     $users->where(function ($query) use ($request) {
-        //         $query->where('users.first_name', 'like', '%'. $request->get('user_name') . '%');
-        //         $query->OrWhere('users.last_name', 'like', '%'. $request->get('user_name') . '%');
-        //     });
-        // }
+        if ($request->has('user_name') && $request->filled('user_name')) {
+            $users->where(function ($query) use ($request) {
+                $query->where('users.first_name', 'like', '%'. $request->get('user_name') . '%');
+                $query->OrWhere('users.last_name', 'like', '%'. $request->get('user_name') . '%');
+            });
+        }
 
-        // if ($request->has('jobId') && $request->filled('jobId')) {
-        //     $users->where('parent_id', '=', $request->get('jobId'));
-        // }
+        if ($request->has('jobId') && $request->filled('jobId')) {
+            $users->where('parent_id', '=', $request->get('jobId'));
+        }
 
-        // if ($request->has('jobType') && $request->filled('jobType')) {
-        //     $users->where('availabilities.job_id', '=', $request->get('jobType'));
-        // }
+        if ($request->has('jobType') && $request->filled('jobType')) {
+            $users->where('availabilities.job_id', '=', $request->get('jobType'));
+        }
+
+        // dd($users);
+        return response([
+            'results' => $users->get()->all()
+        ], 200); 
+    }
+
+    public function myJobs(Request $request) 
+    {
+        $users = DB::table('availabilities')
+            ->select(
+                DB::raw(
+                    "users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, jobs_parent.title as profession, jobs.title as specialty"
+                )
+            )
+            ->join('users', 'users.id', '=','availabilities.user_id')
+            ->join('jobs', 'jobs.id', '=','availabilities.job_id')
+            ->join('jobs as jobs_parent', 'jobs.parent_id', '=','jobs_parent.id')
+            ->where('availabilities.user_id', '=', auth()->user()->id);
 
         return response([
             'results' => $users->get()->all()

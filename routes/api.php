@@ -30,8 +30,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return $request->user();
     });
     Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('availabilites', [AvailabilityController::class, 'create']);
+    Route::post('availabilities', [AvailabilityController::class, 'create']);
     Route::put('availabilities', [AvailabilityController::class, 'update']);
+    Route::get('my-availabilities', [AvailabilityController::class, 'myJobs']);
     Route::post('user-info', [UserInformationController::class, 'addInfo']);
     Route::get('user/{userId}', [UserInformationController::class, 'getUserInfo']);
     Route::post('user-info/{userInfoId}', [UserInformationController::class, 'patchInfo']);

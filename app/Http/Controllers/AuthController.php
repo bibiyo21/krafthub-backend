@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -37,7 +36,8 @@ class AuthController extends Controller
             "city" => $request->input('city', ''),
             "zipcode" => $request->input('zipcode', ''),
             "email" => $request->input('email', ''),
-            "password" => bcrypt($request->input('password'))
+            "password" => bcrypt($request->input('password')),
+            "access_level" => 1
         ]);
 
         $token = $user->createToken('myapptoken')->plainTextToken;

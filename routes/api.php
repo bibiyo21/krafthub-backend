@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AvailabilityController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\UserInformationController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,11 +26,13 @@ Route::post('login', [AuthController::class, 'login']);
 Route::get('job-types', [JobController::class, 'getJobTypes']);
 Route::get('job-types/{type}', [JobController::class, 'getJobByType']);
 Route::get('availabilities', [AvailabilityController::class, 'jobUsers']);
+Route::post('book', [BookingController::class, 'create']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('user', function (Request $request) {
         return $request->user();
     });
+    Route::put('users', [UsersController::class, 'update']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('availabilities', [AvailabilityController::class, 'create']);
     Route::put('availabilities', [AvailabilityController::class, 'update']);
@@ -37,4 +41,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('user/{userId}', [UserInformationController::class, 'getUserInfo']);
     Route::post('user-info/{userInfoId}', [UserInformationController::class, 'patchInfo']);
     Route::delete('user-info/{userInfoId}', [UserInformationController::class, 'deleteInfo']);
+    
 });

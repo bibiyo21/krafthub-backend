@@ -68,22 +68,22 @@ class AvailabilityController extends Controller
 //             $users->where('availabilities.user_id', '!=', auth()->user()->id);
 //         }
 
-        if ($request->has('user_name') && $request->filled('user_name')) {
+        if ($request->has('userName') && $request->filled('userName')) {
             $users->where(function ($query) use ($request) {
-                $query->where('users.first_name', 'like', '%'. $request->get('user_name') . '%');
-                $query->OrWhere('users.last_name', 'like', '%'. $request->get('user_name') . '%');
+                $query->where('users.first_name', 'like', '%'. $request->get('userName') . '%');
+                $query->OrWhere('users.last_name', 'like', '%'. $request->get('userName') . '%');
             });
         }
 
-        if ($request->has('jobId') && $request->filled('jobId')) {
-            $users->where('jobs.parent_id', '=', $request->get('jobId'));
+        if ($request->has('job') && $request->filled('job')) {
+            $users->where('jobs.parent_id', '=', $request->get('job'));
         }
 
         if ($request->has('jobType') && $request->filled('jobType')) {
             $users->where('availabilities.job_id', '=', $request->get('jobType'));
         }
 
-        // dd($users);
+        // dd($users->get());
         return response([
             'results' => $users->get()->all()
         ], 200); 

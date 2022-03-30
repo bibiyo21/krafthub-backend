@@ -12,7 +12,8 @@ class BookingController extends Controller
     public function create(Request $request) 
     {
         $validator = Validator::make($request->all(), [
-            'eta' => 'required'
+            'eta' => 'required',
+            'maker_id'=> 'required'
         ]);
 
         if ($validator->fails()) {
@@ -21,12 +22,11 @@ class BookingController extends Controller
             ], 400);
         }
 
-        dd(Carbon::parse('d-m-Y H:i:s', strtotime($request->get('eta'))));
 
         Booking::create([
             'maker_id' => $request->get('maker_id'),
-            'user_id' => 1,
-            'eta' => Carbon::create($request->get('eta')),
+            'user_id' => auth()->user()->id,
+            'eta' => Carbon::parse($request->get('eta'))->format('Y-m-d H:i:s'),
             'additional_info' => $request->get('additional_info'),
         ]);
 

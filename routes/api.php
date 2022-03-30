@@ -26,7 +26,6 @@ Route::post('login', [AuthController::class, 'login']);
 Route::get('job-types', [JobController::class, 'getJobTypes']);
 Route::get('job-types/{type}', [JobController::class, 'getJobByType']);
 Route::get('availabilities', [AvailabilityController::class, 'jobUsers']);
-Route::post('book', [BookingController::class, 'create']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('user', function (Request $request) {
@@ -41,5 +40,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('user/{userId}', [UserInformationController::class, 'getUserInfo']);
     Route::post('user-info/{userInfoId}', [UserInformationController::class, 'patchInfo']);
     Route::delete('user-info/{userInfoId}', [UserInformationController::class, 'deleteInfo']);
-    
+    Route::post('book', [BookingController::class, 'create']);
 });

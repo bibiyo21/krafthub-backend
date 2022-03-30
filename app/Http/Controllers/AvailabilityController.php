@@ -55,18 +55,16 @@ class AvailabilityController extends Controller
         $users = DB::table('availabilities')
             ->select(
                 DB::raw(
-                    "users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, jobs_parent.title as profession, jobs.title as specialty"
+                    "users.id, users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, jobs_parent.title as profession, jobs.title as specialty"
                 )
             )
             ->join('users', 'users.id', '=','availabilities.user_id')
             ->join('jobs', 'jobs.id', '=','availabilities.job_id')
             ->join('jobs as jobs_parent', 'jobs.parent_id', '=','jobs_parent.id');
         
-// dd(session('users'));
-//         if (auth()->check()) {
-//             // dd('wew');
-//             $users->where('availabilities.user_id', '!=', auth()->user()->id);
-//         }
+        if (auth()->check()) {
+            $users->where('availabilities.user_id', '!=', auth()->user()->id);
+        }
 
         if ($request->has('userName') && $request->filled('userName')) {
             $users->where(function ($query) use ($request) {
@@ -83,7 +81,6 @@ class AvailabilityController extends Controller
             $users->where('availabilities.job_id', '=', $request->get('jobType'));
         }
 
-        // dd($users->get());
         return response([
             'results' => $users->get()->all()
         ], 200); 

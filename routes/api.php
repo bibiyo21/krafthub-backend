@@ -41,4 +41,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('user-info/{userInfoId}', [UserInformationController::class, 'patchInfo']);
     Route::delete('user-info/{userInfoId}', [UserInformationController::class, 'deleteInfo']);
     Route::post('book', [BookingController::class, 'create']);
+    Route::get('bookings/scheduled', [BookingController::class, 'scheduledBookings']);
+    Route::get('bookings/jobs', [BookingController::class, 'jobBookings']);
+    Route::post('bookings/updatestatus', [BookingController::class, 'patchBooking']);
 });

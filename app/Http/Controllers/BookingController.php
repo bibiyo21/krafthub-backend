@@ -38,6 +38,8 @@ class BookingController extends Controller
 
     public function patchBooking(Request $request) 
     {
+
+        dd($request->all());
         $booking = Booking::find($request->get('id'));
         $booking->status = $request->get('status');
 

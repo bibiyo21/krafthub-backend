@@ -41,6 +41,7 @@ class BookingController extends Controller
 
         // dd($request->all(), $request->get('status'));
         $booking = Booking::find($request->get('id'));
+        dd($booking);
         $booking->status = $request->get('status');
 
         $booking->save();

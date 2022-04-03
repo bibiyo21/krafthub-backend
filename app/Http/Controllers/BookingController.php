@@ -55,7 +55,7 @@ class BookingController extends Controller
         $bookings = DB::table('bookings')
             ->select( 
                 DB::raw(
-                    "bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status"
+                    "bookings.maker_id as makerId, bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status"
                 )
             )
             ->where('bookings.user_id', '=',  auth()->user()->id)

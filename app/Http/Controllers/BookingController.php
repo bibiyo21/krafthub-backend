@@ -73,7 +73,7 @@ class BookingController extends Controller
                 DB::raw(
                     "bookings.maker_id as makerId, bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status"
                 )
-            )
+            );
        
         return response([
             'results' => $bookings->get()->all()

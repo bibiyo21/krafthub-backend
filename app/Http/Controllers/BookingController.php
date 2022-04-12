@@ -73,7 +73,8 @@ class BookingController extends Controller
                 DB::raw(
                     "bookings.maker_id as makerId, bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status"
                 )
-            );
+            )
+            ->join('users', 'users.id', '=','bookings.maker_id');
        
         return response([
             'results' => $bookings->get()->all()

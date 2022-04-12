@@ -65,6 +65,20 @@ class BookingController extends Controller
             'results' => $bookings->get()->all()
         ], 200); 
     }
+    
+     public function scheduledBookingsAdmin() 
+    {
+        $bookings = DB::table('bookings')
+            ->select( 
+                DB::raw(
+                    "bookings.maker_id as makerId, bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status"
+                )
+            )
+       
+        return response([
+            'results' => $bookings->get()->all()
+        ], 200); 
+    }
 
     public function jobBookings() 
     {

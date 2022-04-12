@@ -38,8 +38,6 @@ class BookingController extends Controller
 
     public function patchBooking(Request $request) 
     {
-
-        dd($request->all());
         $booking = Booking::find($request->get('id'));
         $booking->status = $request->get('status');
 
@@ -55,7 +53,7 @@ class BookingController extends Controller
         $bookings = DB::table('bookings')
             ->select( 
                 DB::raw(
-                    "bookings.maker_id as makerId, bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status"
+                    "bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status"
                 )
             )
             ->where('bookings.user_id', '=',  auth()->user()->id)
@@ -66,7 +64,7 @@ class BookingController extends Controller
         ], 200); 
     }
     
-     public function scheduledBookingsAdmin() 
+    public function scheduledBookingsAdmin() 
     {
         $bookings = DB::table('bookings')
             ->select( 

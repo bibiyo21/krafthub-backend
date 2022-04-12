@@ -39,7 +39,7 @@ class BookingController extends Controller
     public function patchBooking(Request $request) 
     {
 
-        // dd($request->all(), $request->get('status'));
+        dd($request->all());
         $booking = Booking::find($request->get('id'));
         $booking->status = $request->get('status');
 
@@ -55,12 +55,26 @@ class BookingController extends Controller
         $bookings = DB::table('bookings')
             ->select( 
                 DB::raw(
-                    "bookings.id as booking_id, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status"
+                    "bookings.maker_id as makerId, bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status"
                 )
             )
             ->where('bookings.user_id', '=',  auth()->user()->id)
             ->join('users', 'users.id', '=','bookings.maker_id');
 
+        return response([
+            'results' => $bookings->get()->all()
+        ], 200); 
+    }
+    
+     public function scheduledBookingsAdmin() 
+    {
+        $bookings = DB::table('bookings')
+            ->select( 
+                DB::raw(
+                    "bookings.maker_id as makerId, bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status"
+                )
+            )
+       
         return response([
             'results' => $bookings->get()->all()
         ], 200); 
@@ -71,7 +85,7 @@ class BookingController extends Controller
         $bookings = DB::table('bookings')
             ->select( 
                 DB::raw(
-                    "bookings.maker_id as maker_id, bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status"
+                    "bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status"
                 )
             )
             ->where('bookings.maker_id', '=',  auth()->user()->id)

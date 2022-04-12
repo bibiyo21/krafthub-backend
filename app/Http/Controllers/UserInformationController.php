@@ -41,6 +41,17 @@ class UserInformationController extends Controller
             'user_info' => $userInfo->get()->toArray()
         ], 200);
     }
+    
+    public function getAllUserInfo() 
+    {
+
+        $userInfo = UserInformation::where('user_id', $userId);
+        
+        return response([
+            'user_info' => $userInfo->get()->toArray()
+        ], 200);
+    }
+    
 
     public function patchInfo($userInfoId, Request $request) 
     {

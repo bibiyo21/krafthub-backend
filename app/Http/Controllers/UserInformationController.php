@@ -47,7 +47,7 @@ class UserInformationController extends Controller
     public function getAllUserInfo() 
     {
 
-        $userInfo = UserInformation::all()->sortDesc();
+        $userInfo = User::all()->sortDesc();
         
         return response([
             'links' => $userInfo

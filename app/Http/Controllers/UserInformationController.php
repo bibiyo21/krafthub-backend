@@ -45,7 +45,7 @@ class UserInformationController extends Controller
     public function getAllUserInfo() 
     {
 
-        $userInfo = UserInformation;
+        $userInfo = UserInformation::where('user_id', "user_id");
         
         return response([
             'user_info' => $userInfo->get()->toArray()

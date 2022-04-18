@@ -50,7 +50,7 @@ class UserInformationController extends Controller
         $userInfo = User::all()->sortDesc();
         
         return response([
-            'links' => $userInfo
+            'results' => $userInfo
         ], 200);
     }
     

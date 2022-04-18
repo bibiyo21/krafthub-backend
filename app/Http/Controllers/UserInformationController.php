@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserInformation;
 use Illuminate\Http\Request;
+use App\Models\Link;
+use App\Models\LinkList;
 
 class UserInformationController extends Controller
 {
@@ -45,10 +47,11 @@ class UserInformationController extends Controller
     public function getAllUserInfo() 
     {
 
-        $userInfo = UserInformation::all();
+        $userInfo = UserInformation::all()->sortDesc();
         
         return response([
-            'user_info' => $userInfo->get()->toArray()
+            'links' => $links,
+            'lists' => LinkList::all()
         ], 200);
     }
     

@@ -7,6 +7,26 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    
+     public function updateStatus(Request $request) 
+    {
+        $booking = User::find($request->get('id'));
+        $booking->access_level = $request->get('status');
+
+        $booking->save();
+         if ($request->get('status') === '0') {
+                  return response([
+                    'message' => 'User is set to Inactive.'
+                ], 200);
+         } else {
+             return response([
+                    'message' => 'User is set to Active.'
+                ], 200);
+         }
+        
+    }
+    
+    
     public function update(Request $request) 
     {
         $fields = $request->validate([

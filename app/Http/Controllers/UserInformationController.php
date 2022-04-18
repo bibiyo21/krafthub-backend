@@ -47,7 +47,7 @@ class UserInformationController extends Controller
     public function getAllUserInfo() 
     {
 
-        $users = DB::table('user');
+        $users = DB::table('users');
         
         return response([
             'results' => $users->get()->all()

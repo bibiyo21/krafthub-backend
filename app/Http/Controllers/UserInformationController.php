@@ -47,10 +47,10 @@ class UserInformationController extends Controller
     public function getAllUserInfo() 
     {
 
-        $users = DB::table('users');
+        $users = User::all();
         
         return response([
-            'results' => $users->get()->all()
+            'results' => $users->get()->toArray()
         ], 200); 
     }
     

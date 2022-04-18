@@ -47,10 +47,10 @@ class UserInformationController extends Controller
     public function getAllUserInfo() 
     {
 
-        $userInfo = User::all()->sortDesc();
+        $users = DB::table('user');
         
         return response([
-            'results' => $userInfo->get()->all()
+            'results' => $users->get()->all()
         ], 200); 
     }
     

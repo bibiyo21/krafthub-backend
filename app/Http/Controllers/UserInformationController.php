@@ -50,7 +50,7 @@ class UserInformationController extends Controller
         $users = User::all();
         
         return response([
-            'results' => $users->get()
+            'results' => $users->get()->toArray()
         ], 200); 
     }
     

@@ -13,8 +13,8 @@ class AddAccessLevelToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('access_level')->default(1);
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->decimal('amount', 5, 2)->default(0.00);
         });
     }
 

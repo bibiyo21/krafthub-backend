@@ -14,5 +14,6 @@ class Booking extends Model
         'user_id',
         'eta',
         'additional_info',
+        'amount',
     ];
 }

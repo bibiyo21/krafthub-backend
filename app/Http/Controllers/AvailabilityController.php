@@ -14,6 +14,7 @@ class AvailabilityController extends Controller
             'job_id' => 'required',
             'time_in' => 'required',
             'time_out' => 'required',
+            'amount' => 'required',
         ]);
 
         Availability::create([
@@ -21,6 +22,7 @@ class AvailabilityController extends Controller
             'job_id' => $request->input('job_id'), 
             'time_in' => $request->input('time_in'), 
             'time_out' => $request->input('time_out'), 
+            'amount' => $request->input('amount'), 
         ]);
 
         return response([
@@ -35,6 +37,7 @@ class AvailabilityController extends Controller
             'job_id' => 'required',
             'time_in' => 'required',
             'time_out' => 'required',
+            'amount' => 'required',
         ]);
 
         $availability = Availability::find($request->input('availability_code'));
@@ -42,6 +45,7 @@ class AvailabilityController extends Controller
         $availability->job_id = $request->input('job_id');
         $availability->time_in = $request->input('time_in');
         $availability->time_out = $request->input('time_out');
+         $availability->time_out = $request->input('amount');
 
         $availability->save();
 
@@ -55,7 +59,7 @@ class AvailabilityController extends Controller
         $users = DB::table('availabilities')
             ->select(
                 DB::raw(
-                    "users.id, users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, jobs_parent.title as profession, jobs.title as specialty"
+                    "users.id, users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, availabilities.amount, jobs_parent.title as profession, jobs.title as specialty"
                 )
             )
             ->join('users', 'users.id', '=','availabilities.user_id')
@@ -91,7 +95,7 @@ class AvailabilityController extends Controller
         $users = DB::table('availabilities')
             ->select(
                 DB::raw(
-                    "users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, jobs_parent.title as profession, jobs.title as specialty"
+                    "users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, availabilities.amount, jobs_parent.title as profession, jobs.title as specialty"
                 )
             )
             ->join('users', 'users.id', '=','availabilities.user_id')

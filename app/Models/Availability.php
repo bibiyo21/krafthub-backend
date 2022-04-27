@@ -13,7 +13,8 @@ class Availability extends Model
         'job_id',
         'user_id',
         'time_in',
-        'time_out'
+        'time_out',
+        'amount'
     ];
 
     public function jobs() 

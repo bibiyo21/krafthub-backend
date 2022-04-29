@@ -14,35 +14,25 @@ class JobsSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('jobs')->insert([
-            "id" => 5,
-            'title' => "Rough Carpenter",
-            'description' => "Service for Rough Carpenter",
-            'parent_id' => 1
+       DB::table('jobs')->insert([
+            "id" => 10,
+            'title' => "Bathroom Faucets",
+            'description' => "Service for Bathroom Faucets",
+            'parent_id' => 2
         ]);
+
         DB::table('jobs')->insert([
-            "id" => 6,
-            'title' => "Joister",
-            'description' => "Service for Joister",
-            'parent_id' => 1
-        ]);
+                    "id" => 11,
+                    'title' => "Ablution Cleaning",
+                    'description' => "Service for Ablution Cleaning",
+                    'parent_id' => 3
+                ]);
+
         DB::table('jobs')->insert([
-            "id" => 7,
-            'title' => "Trim Carpenter",
-            'description' => "Service for Trim Carpenter",
-            'parent_id' => 1
-        ]);
-        DB::table('jobs')->insert([
-            "id" => 8,
-            'title' => "Cabinet maker",
-            'description' => "Service for Cabinet maker",
-            'parent_id' => 1
-        ]);
-        DB::table('jobs')->insert([
-            "id" => 9,
-            'title' => "Framer",
-            'description' => "Service for Framer",
-            'parent_id' => 1
-        ]);
+                    "id" => 12,
+                    'title' => "Domestic/Residential Electrician",
+                    'description' => "Domestic/Residential Electrician",
+                    'parent_id' => 4
+                ]);
     }
 }

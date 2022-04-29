@@ -25,6 +25,7 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::get('job-types', [JobController::class, 'getJobTypes']);
 Route::get('job-types/{type}', [JobController::class, 'getJobByType']);
+Route::get('job-Subtypes/', [JobController::class, 'getAllJobTypes']);
 Route::get('availabilities', [AvailabilityController::class, 'jobUsers']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {

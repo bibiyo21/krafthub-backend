@@ -15,6 +15,15 @@ class JobController extends Controller
             'results' => $jobTypes->get()->toArray()
         ], 200);
     }
+    
+    public function getAllJobTypes() 
+    {
+        $jobTypes = Job::whereNotNull('parent_id');
+        
+        return response([
+            'results' => $jobTypes->get()->toArray()
+        ], 200);
+    }
 
     public function getJobByType($type) 
     {

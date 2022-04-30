@@ -28,6 +28,9 @@ Route::get('job-types/{type}', [JobController::class, 'getJobByType']);
 Route::get('job-Subtypes', [JobController::class, 'getAllJobTypes']);
 Route::get('availabilities', [AvailabilityController::class, 'jobUsers']);
 
+Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
+Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('user', function (Request $request) {
         return $request->user();

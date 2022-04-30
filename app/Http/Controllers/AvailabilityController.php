@@ -129,20 +129,22 @@ class AvailabilityController extends Controller
         return view('add_image');
     }
     //Store image
-    public function storeImage(){
-       $data= new Postimage();
+    public function storeImage(Request $request){
 
         if($request->file('image')){
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
             $file-> move(public_path('public/Image'), $filename);
-            $data['image']= $filename;
+            setFilePath($file);
+        } else {
+            $filename= date('YmdHi').$request->input('fileName');
+            $file-> move(public_path('public/Image'), $filename);
+             setFilePath($file);
         }
-        $data->save();
-        
-        setFilePath($filename);
-        
-        return redirect()->route('images.view');
+
+         return response([
+            'message' => 'availability uploaded file',
+        ], 200);
         
     }
 		//View image

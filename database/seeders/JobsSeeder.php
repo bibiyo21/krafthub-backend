@@ -16,7 +16,7 @@ class JobsSeeder extends Seeder
     {
 
                        DB::table('jobs')->insert([
-                                    "id" => 40,
+                                    "id" => 70,
                                      'title' => "Ablution Cleaning",
                                     'description' => "Service for Ablution Cleaning",
                                     'parent_id' => 3

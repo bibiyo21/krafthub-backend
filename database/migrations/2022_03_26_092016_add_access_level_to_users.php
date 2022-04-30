@@ -13,11 +13,9 @@ class AddAccessLevelToUsers extends Migration
      */
     public function up()
     {
-               
         Schema::table('availabilities', function (Blueprint $table) {
-            $table->string('file_path');
+            $table->string('filepath');
         });
-        
     }
 
     /**

@@ -28,15 +28,7 @@ Route::get('job-types/{type}', [JobController::class, 'getJobByType']);
 Route::get('job-Subtypes', [JobController::class, 'getAllJobTypes']);
 Route::get('availabilities', [AvailabilityController::class, 'jobUsers']);
 
-//For adding an image
-Route::get('/add-image',[AvailabilityController::class,'addImage'])->name('images.add');
-
-//For storing an image
-Route::post('/store-image',[AvailabilityController::class,'storeImage'])
-->name('images.store');
-
-//For showing an image
-Route::get('/view-image',[AvailabilityController::class,'viewImage'])->name('images.view');
+Route::post('images', [AvailabilityController::class, 'upload'])->name('images');
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {

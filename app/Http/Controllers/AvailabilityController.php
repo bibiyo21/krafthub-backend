@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Availability;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use DB;
 
 class AvailabilityController extends Controller
 {

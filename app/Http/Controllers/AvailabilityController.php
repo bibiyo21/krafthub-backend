@@ -4,23 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Availability;
 use Illuminate\Http\Request;
-use App\Models\Postimage;
-use DB;
+use Illuminate\Support\Facades\Validator;
+
 
 class AvailabilityController extends Controller
 {
     
-     protected $filePath;
-    
-    public function getFilePath() {
-     
-        return $filePath;
-    }
-    
-    public function setFilePath(String  $value) {
-     
-        return $filePath = $value;
-    }
+
     
     public function create(Request $request) 
     {
@@ -37,7 +27,6 @@ class AvailabilityController extends Controller
             'time_in' => $request->input('time_in'), 
             'time_out' => $request->input('time_out'), 
             'amount' => $request->input('amount'), 
-            'file_path' => getFilePath(),
         ]);
 
         return response([
@@ -124,32 +113,45 @@ class AvailabilityController extends Controller
     }
     
     
-    
-    public function addImage(){
-        return view('add_image');
-    }
-    //Store image
-    public function storeImage(Request $request){
+    /**
+     * Upload Image
+     * @param $request
+     * @return JSON response
+     */
+    public function upload(Request $request) {
+        $imagesName = [];
+        $response = [];
 
-        if($request->file('image')){
-            $file= $request->file('image');
-            $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('public/Image'), $filename);
-            setFilePath($file);
-        } else {
-            $filename= date('YmdHi').$request->input('fileName');
-            $file-> move(public_path('public/Image'), $filename);
-             setFilePath($file);
+        $validator = Validator::make($request->all(),
+            [
+                'images' => 'required',
+                'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            ]
+        );
+
+        if($validator->fails()) {
+            return response()->json(["status" => "failed", "message" => "Validation error", "errors" => $validator->errors()]);
         }
 
-         return response([
-            'message' => 'availability uploaded file',
-        ], 200);
-        
-    }
-		//View image
-    public function viewImage(){
-        return view('view_image');
+        if($request->has('images')) {
+            foreach($request->file('images') as $image) {
+                $filename = time().rand(3). '.'.$image->getClientOriginalExtension();
+                $image->move('uploads/', $filename);
+
+                Availability::create([
+                    'file_path' => $filename
+                ]);
+            }
+
+            $response["status"] = "successs";
+            $response["message"] = "Success! image(s) uploaded";
+        }
+
+        else {
+            $response["status"] = "failed";
+            $response["message"] = "Failed! image(s) not uploaded";
+        }
+        return response()->json($response);
     }
     
     

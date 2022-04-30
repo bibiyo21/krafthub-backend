@@ -121,6 +121,7 @@ class AvailabilityController extends Controller
     public function upload(Request $request) {
         $imagesName = [];
         $response = [];
+        
 
         $validator = Validator::make($request->all(),
             [
@@ -137,21 +138,23 @@ class AvailabilityController extends Controller
             foreach($request->file('images') as $image) {
                 $filename = time().rand(3). '.'.$image->getClientOriginalExtension();
                 $image->move('uploads/', $filename);
-
-                Availability::create([
-                    'file_path' => $filename
-                ]);
+                
             }
+            $availability = Availability::find($request->input('job_id'));
+            $availability->file_path = $filename; 
+            $availability->save();
 
-            $response["status"] = "successs";
-            $response["message"] = "Success! image(s) uploaded";
+             return response([
+                    'message' => 'uploaded successfully',
+                ], 200);
         }
 
         else {
-            $response["status"] = "failed";
-            $response["message"] = "Failed! image(s) not uploaded";
+             return response([
+                    'message' => 'upload fails',
+                ], 200);
         }
-        return response()->json($response);
+       
     }
     
     

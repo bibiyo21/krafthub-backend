@@ -15,7 +15,7 @@ class AddFilepathToAvailabilities extends Migration
     {
                
         Schema::table('availabilities', function (Blueprint $table) {
-            $table->string('file_path');
+            $table->string('file_path')->default('');;
         });
         
     }

@@ -15,7 +15,7 @@ class AddAccessLevelToUsers extends Migration
     {
                
         Schema::table('availabilities', function (Blueprint $table) {
-            $table->binary('QRCode');
+            $table->binary('qrcode');
         });
         
     }

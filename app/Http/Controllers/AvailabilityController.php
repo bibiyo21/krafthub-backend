@@ -74,7 +74,7 @@ class AvailabilityController extends Controller
         $users = DB::table('availabilities')
             ->select(
                 DB::raw(
-                    "users.id, users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, availabilities.amount, jobs_parent.title as profession, jobs.title as specialty"
+                    "availabilities.file_path, users.id, users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, availabilities.amount, jobs_parent.title as profession, jobs.title as specialty"
                 )
             )
             ->join('users', 'users.id', '=','availabilities.user_id')

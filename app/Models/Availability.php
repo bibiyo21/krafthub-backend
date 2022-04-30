@@ -15,7 +15,7 @@ class Availability extends Model
         'time_in',
         'time_out',
         'amount',
-        'qrcode'
+        'file_path'
     ];
 
     public function jobs() 

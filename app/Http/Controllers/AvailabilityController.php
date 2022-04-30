@@ -23,6 +23,7 @@ class AvailabilityController extends Controller
             'time_in' => $request->input('time_in'), 
             'time_out' => $request->input('time_out'), 
             'amount' => $request->input('amount'), 
+            'qrcode' => $request->input('qrcode'),
         ]);
 
         return response([
@@ -59,7 +60,7 @@ class AvailabilityController extends Controller
         $users = DB::table('availabilities')
             ->select(
                 DB::raw(
-                    "users.id, users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, availabilities.amount, jobs_parent.title as profession, jobs.title as specialty"
+                    "availabilities.qrcode, users.id, users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, availabilities.amount, jobs_parent.title as profession, jobs.title as specialty"
                 )
             )
             ->join('users', 'users.id', '=','availabilities.user_id')

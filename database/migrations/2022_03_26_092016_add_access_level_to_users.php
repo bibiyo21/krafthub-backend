@@ -25,8 +25,8 @@ class AddAccessLevelToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('availabilities', function (Blueprint $table) {
-            $table->dropColumn('file_path');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('isValidated');
         });
     }
 }

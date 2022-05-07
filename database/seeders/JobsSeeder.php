@@ -14,95 +14,10 @@ class JobsSeeder extends Seeder
      */
     public function run()
     {
-
-                       DB::table('jobs')->insert([
-                                    "id" => 70,
-                                     'title' => "Ablution Cleaning",
-                                    'description' => "Service for Ablution Cleaning",
-                                    'parent_id' => 3
-                                ]);
-                        DB::table('jobs')->insert([
-                                    "id" => 41,
-                                     'title' => "Carpet Cleaning",
-                                    'description' => "Service for Carpet Cleaning",
-                                    'parent_id' => 3
-                                ]);
-                        DB::table('jobs')->insert([
-                                    "id" => 42,
-                                     'title' => "Ceiling Cleaning",
-                                    'description' => "Service for Ceiling Cleaning",
-                                    'parent_id' => 3
-                                ]);
-                        DB::table('jobs')->insert([
-                                    "id" => 43,
-                                     'title' => "Curtain Cleaning",
-                                    'description' => "Service for Curtain Cleaning",
-                                    'parent_id' => 3
-                                ]);
-                        DB::table('jobs')->insert([
-                                    "id" => 44,
-                                     'title' => "Dry Carpet Cleaning",
-                                    'description' => "Service for Dry Carpet Cleaning",
-                                    'parent_id' => 3
-                                ]);
-                        DB::table('jobs')->insert([
-                                    "id" => 45,
-                                     'title' => "Food safety",
-                                    'description' => "Service for Food safety",
-                                    'parent_id' => 3
-                                ]);
-                        DB::table('jobs')->insert([
-                                    "id" => 46,
-                                     'title' => "General Cleaning",
-                                    'description' => "Service for General Cleaning",
-                                    'parent_id' => 3
-                                ]);
-                        DB::table('jobs')->insert([
-                                    "id" => 47,
-                                     'title' => "Mattress Cleaning",
-                                    'description' => "Service for Mattress Cleaning",
-                                    'parent_id' => 3
-                                ]);
-                        DB::table('jobs')->insert([
-                                    "id" => 48,
-                                     'title' => "Grease Trap Cleaning",
-                                    'description' => "Service for Grease Trap Cleaning",
-                                    'parent_id' => 3
-                                ]);
-                        DB::table('jobs')->insert([
-                                    "id" => 49,
-                                     'title' => "Canopy Cleaning",
-                                    'description' => "Service for Canopy Cleaning",
-                                    'parent_id' => 3
-                                ]);
-                        DB::table('jobs')->insert([
-                                    "id" => 50,
-                                     'title' => "Window Cleaning",
-                                    'description' => "Service for Window Cleaning",
-                                    'parent_id' => 3
-                                ]);
-                        DB::table('jobs')->insert([
-                                    "id" => 51,
-                                     'title' => "Disinfecting Cleaning",
-                                    'description' => "Service for Disinfecting Cleaning",
-                                    'parent_id' => 3
-                                ]);
-                        DB::table('jobs')->insert([
-                                    "id" => 52,
-                                     'title' => "Upholstery Cleaning ",
-                                    'description' => "Service for Upholstery Cleaning ",
-                                    'parent_id' => 3
-                                ]);
-                        DB::table('jobs')->insert([
-                                    "id" => 53,
-                                     'title' => "Wet Carpet Cleaning",
-                                    'description' => "Service for Wet Carpet Cleaning",
-                                    'parent_id' => 3
-                                ]);
-
+                                
 
                         DB::table('jobs')->insert([
-                                    "id" => 53,
+                                    "id" => 72,
                                      'title' => "Domestic/Residential Electrician",
                                     'description' => "Service for Domestic/Residential Electrician",
                                     'parent_id' => 4

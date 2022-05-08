@@ -37,7 +37,8 @@ class AuthController extends Controller
             "zipcode" => $request->input('zipcode', ''),
             "email" => $request->input('email', ''),
             "password" => bcrypt($request->input('password')),
-            "access_level" => 1
+            "access_level" => 1,
+            "isValidated" => 0
         ]);
 
         $token = $user->createToken('myapptoken')->plainTextToken;
@@ -58,20 +59,32 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('email', $request->input('email'))->first();
+            
+        if($user->isValidated === 1)
+        {
 
-        if (!$user || !Hash::check($request->input('password'), $user->password)) {
+                    if (!$user || !Hash::check($request->input('password'), $user->password)) {
+                    return response([
+                        'message' => 'User name and password does not matched',
+                        'status' => '401'
+                    ], 401);
+                }
+
+                $token = $user->createToken('myapptoken')->plainTextToken;
+
+                return response([
+                    "token" => $token,
+                    "user" => $user
+                ], 200);
+            
+        } else {
             return response([
-                'message' => 'User name and password does not matched',
-                'status' => '401'
-            ], 401);
+                'message' => 'Email is not validated',
+                'status' => '402'
+            ], 402);
         }
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
-
-        return response([
-            "token" => $token,
-            "user" => $user
-        ], 200);
+        
     }
 
     public function logout() 

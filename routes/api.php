@@ -43,7 +43,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('user-info', [UserInformationController::class, 'addInfo']);
     Route::get('user/{userId}', [UserInformationController::class, 'getUserInfo']);
     Route::get('userAll', [UserInformationController::class, 'getAllUserInfo']);
-    Route::post('user/updatestatus', [UsersController::class, 'updateStatus']);
+    Route::post('user/updatestatus', [UsersController::class, 'updateValidity']);
+     Route::post('user/updatevalidity', [UsersController::class, 'updateStatus']);
     Route::post('user-info/{userInfoId}', [UserInformationController::class, 'patchInfo']);
     Route::delete('user-info/{userInfoId}', [UserInformationController::class, 'deleteInfo']);
     Route::post('book', [BookingController::class, 'create']);

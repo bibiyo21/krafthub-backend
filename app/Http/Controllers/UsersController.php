@@ -26,6 +26,18 @@ class UsersController extends Controller
         
     }
     
+     public function updateValidity(Request $request) 
+    {
+        $booking = User::find($request->get('id'));
+        $booking-> isValidated = $request->get('status');
+
+        $booking->save();
+        return response([
+            'message' => "Profile updated successfully"
+        ]);
+        
+    }
+    
     
     public function update(Request $request) 
     {

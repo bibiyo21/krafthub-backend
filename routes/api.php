@@ -27,7 +27,7 @@ Route::get('job-types', [JobController::class, 'getJobTypes']);
 Route::get('job-types/{type}', [JobController::class, 'getJobByType']);
 Route::get('job-Subtypes', [JobController::class, 'getAllJobTypes']);
 Route::get('availabilities', [AvailabilityController::class, 'jobUsers']);
- Route::post('user/updateValidConfirm', [UsersController::class, 'updateValidity']);
+ Route::post('user/updateValidConfirm', [UsersController::class, 'updateValidityCon']);
 Route::post('images', [AvailabilityController::class, 'upload'])->name('images');
 
 

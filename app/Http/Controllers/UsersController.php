@@ -28,9 +28,21 @@ class UsersController extends Controller
     
      public function updateValidity(Request $request) 
     {
-        $booking = User::find($request->get('id'));
-        $token = $booking->createToken('myapptoken')->plainTextToken;
+        $booking = User::find($request->get('id'));        
          
+        $booking-> isValidated = $request->get('status');
+
+        $booking->save();
+        return response([
+            'message' => "Profile updated successfully"
+        ]);
+        
+    }
+    
+     public function updateValidityCon(Request $request) 
+    {
+        $booking = User::where('email', '=', $request->get('id'))->firstOrFail(); 
+        
          
         $booking-> isValidated = $request->get('status');
 

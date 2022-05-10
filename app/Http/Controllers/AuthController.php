@@ -38,7 +38,7 @@ class AuthController extends Controller
             "email" => $request->input('email', ''),
             "password" => bcrypt($request->input('password')),
             "access_level" => 1,
-            "isValidated" => 0
+            "isValidated" => 0 
         ]);
 
         $token = $user->createToken('myapptoken')->plainTextToken;

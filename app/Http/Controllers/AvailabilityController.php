@@ -19,6 +19,8 @@ class AvailabilityController extends Controller
             'time_in' => 'required',
             'time_out' => 'required',
             'amount' => 'required',
+            'amountPerHour' => 'required',
+            'amountPerDay' => 'required',
         ]);
 
         Availability::create([
@@ -27,6 +29,8 @@ class AvailabilityController extends Controller
             'time_in' => $request->input('time_in'), 
             'time_out' => $request->input('time_out'), 
             'amount' => $request->input('amount'), 
+            'amountPerHour' => $request->input('amountPerHour'), 
+            'amountPerDay' => $request->input('amountPerDay'), 
         ]);
 
         return response([
@@ -63,7 +67,7 @@ class AvailabilityController extends Controller
         $users = DB::table('availabilities')
             ->select(
                 DB::raw(
-                    "availabilities.file_path, users.id, users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, availabilities.amount, jobs_parent.title as profession, jobs.title as specialty"
+                    "availabilities.file_path, users.id, users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, availabilities.amount, availabilities.amountPerDay, availabilities.amountPerHour, jobs_parent.title as profession, jobs.title as specialty"
                 )
             )
             ->join('users', 'users.id', '=','availabilities.user_id')
@@ -99,7 +103,7 @@ class AvailabilityController extends Controller
         $users = DB::table('availabilities')
             ->select(
                 DB::raw(
-                    "users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, availabilities.amount, jobs_parent.title as profession, jobs.title as specialty"
+                    "users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, availabilities.amount, availabilities.amount, availabilities.amountPerDay, jobs_parent.title as profession, jobs.title as specialty"
                 )
             )
             ->join('users', 'users.id', '=','availabilities.user_id')

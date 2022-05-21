@@ -41,7 +41,7 @@ class BookingController extends Controller
     {
         $booking = Booking::find($request->get('id'));
         $booking->status = $request->get('status');
-
+        $booking->additional_info = $request->get('additional_info');
         $booking->save();
 
         return response([

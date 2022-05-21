@@ -27,6 +27,8 @@ class AddAmountHDToBooking extends Migration
         Schema::table('availabilities', function (Blueprint $table) {
             $table->decimal('amountPerDay', 5, 2)->default(0.00);
         });
+
+
     }
 
     /**
@@ -43,6 +45,7 @@ class AddAmountHDToBooking extends Migration
             $table->dropColumn('amountPerHour');
         });
         
+
         Schema::table('availabilities', function (Blueprint $table) {
             $table->dropColumn('amountPerDay');
         });

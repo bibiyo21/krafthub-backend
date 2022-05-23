@@ -19,7 +19,7 @@ class AddAmounthdReasonRateBooking extends Migration
             $table->string('reason')->default('');
         });
         Schema::table('bookings', function (Blueprint $table) {
-            $table->string('rate')->default('');
+           $table->integer('rate')->nullable();
         });
 
 

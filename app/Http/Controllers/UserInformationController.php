@@ -85,7 +85,7 @@ class UserInformationController extends Controller
         $userInfo = User::find($request->get('id'));
         $userInfo->ratings = $userInfo->ratings + $request->get('ratings');
 
-        $booking->save();
+        $userInfo->save();
 
         return response([
             'message' => 'Successfully posted.'

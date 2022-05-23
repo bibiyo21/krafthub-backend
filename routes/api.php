@@ -52,4 +52,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('bookings/scheduledAll', [BookingController::class, 'scheduledBookingsAdmin']);
     Route::get('bookings/jobs', [BookingController::class, 'jobBookings']);
     Route::post('bookings/updatestatus', [BookingController::class, 'patchBooking']);
+    Route::post('bookings/updateReason', [BookingController::class, 'patchBookingReason']);
+    Route::post('bookings/updateRate', [BookingController::class, 'patchBookingReason']);
 });

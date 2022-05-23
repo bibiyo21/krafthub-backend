@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class AddAccessLevelToUsers extends Migration
 {
-    /**
+     /**
      * Run the migrations.
      *
      * @return void
@@ -21,12 +21,14 @@ class AddAccessLevelToUsers extends Migration
             $table->decimal('amountPerDay', 5, 2)->default(0.00);
         });
 
-        Schema::table('availabilities', function (Blueprint $table) {
-            $table->decimal('amountPerHour', 5, 2)->default(0.00);
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->string('reason')->default('');
         });
-        Schema::table('availabilities', function (Blueprint $table) {
-            $table->decimal('amountPerDay', 5, 2)->default(0.00);
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->string('rate')->default('');
         });
+
+
     }
 
     /**
@@ -43,11 +45,12 @@ class AddAccessLevelToUsers extends Migration
             $table->dropColumn('amountPerHour');
         });
         
-        Schema::table('availabilities', function (Blueprint $table) {
-            $table->dropColumn('amountPerDay');
+
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->dropColumn('reason');
         });
-        Schema::table('availabilities', function (Blueprint $table) {
-            $table->dropColumn('amountPerHour');
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->dropColumn('rate');
         });
     }
 }

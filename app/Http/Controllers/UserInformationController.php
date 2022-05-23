@@ -79,6 +79,20 @@ class UserInformationController extends Controller
         ]);
     }
 
+    
+     public function patchBookingRate(Request $request) 
+    {
+        $userInfo = User::find($request->get('id'));
+        $userInfo->ratings = $userInfo->ratings + $request->get('ratings');
+
+        $booking->save();
+
+        return response([
+            'message' => 'Successfully posted.'
+        ], 200);
+    }
+    
+    
     public function deleteInfo($userInfoId, Request $request) 
     {
         UserInformation::findOrFail($userInfoId)->delete();

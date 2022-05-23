@@ -15,11 +15,9 @@ class AddAmounthdReasonRateBooking extends Migration
     {
    
 
+        
         Schema::table('bookings', function (Blueprint $table) {
-            $table->string('reason')->default('');
-        });
-        Schema::table('bookings', function (Blueprint $table) {
-           $table->decimal('rate', 5, 2)->default(0.00);
+            $table->decimal('amountPerDay', 5, 2)->default(0.00);
         });
 
 
@@ -35,10 +33,8 @@ class AddAmounthdReasonRateBooking extends Migration
       
 
         Schema::table('bookings', function (Blueprint $table) {
-            $table->dropColumn('reason');
+            $table->dropColumn('amountPerDay');
         });
-        Schema::table('bookings', function (Blueprint $table) {
-            $table->dropColumn('rate');
-        });
+      
     }
 }

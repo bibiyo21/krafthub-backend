@@ -30,6 +30,8 @@ class BookingController extends Controller
             'eta' => Carbon::parse($request->get('eta'))->format('Y-m-d H:i:s'),
             'additional_info' => $request->get('additional_info'),
             'amount' => $request->get('amount'),
+            'amountPerHour' => $request->get('amountPerHour'),
+            'amountPerDay' => $request->get('amountPerDay'),
         ]);
 
         return response([
@@ -48,13 +50,39 @@ class BookingController extends Controller
             'message' => 'Booking is set to '. $request->get('status'),
         ], 200);
     }
+    
+    public function patchBookingReason(Request $request) 
+    {
+        $booking = Booking::find($request->get('id'));
+        $booking->reason = $request->get('reason');
+
+        $booking->save();
+
+        return response([
+            'message' => 'Successfully posted.',
+        ], 200);
+    }
+
+    
+     public function patchBookingRate(Request $request) 
+    {
+        $booking = Booking::find($request->get('id'));
+        $booking->rate = $request->get('rate');
+
+        $booking->save();
+
+        return response([
+            'message' => 'Successfully posted.'
+        ], 200);
+    }
+    
 
     public function scheduledBookings() 
     {
         $bookings = DB::table('bookings')
             ->select( 
                 DB::raw(
-                    "bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status, bookings.amount"
+                    "bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status, bookings.amount, bookings.amountPerDay,bookings.amountPerHour,bookings.rate,bookings.reason "
                 )
             )
             ->where('bookings.user_id', '=',  auth()->user()->id)
@@ -70,7 +98,7 @@ class BookingController extends Controller
         $bookings = DB::table('bookings')
             ->select( 
                 DB::raw(
-                    "bookings.maker_id as makerId, bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status, bookings.amount"
+                    "bookings.maker_id as makerId, bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status, bookings.amount, bookings.amountPerDay,bookings.amountPerHour,bookings.rate,bookings.reason"
                 )
             )
             ->join('users', 'users.id', '=','bookings.maker_id');
@@ -85,7 +113,7 @@ class BookingController extends Controller
         $bookings = DB::table('bookings')
             ->select( 
                 DB::raw(
-                    "bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status,  bookings.amount"
+                    "bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status,  bookings.amount, bookings.amountPerDay,bookings.amountPerHour,bookings.rate,bookings.reason"
                 )
             )
             ->where('bookings.maker_id', '=',  auth()->user()->id)

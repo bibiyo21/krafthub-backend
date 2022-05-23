@@ -67,7 +67,7 @@ class BookingController extends Controller
      public function patchBookingRate(Request $request) 
     {
         $booking = Booking::find($request->get('id'));
-        $booking->rate = $request->get('rate');
+        $booking->rate = $booking->rate + $request->get('rate');
 
         $booking->save();
 

@@ -27,6 +27,8 @@ class AvailabilityController extends Controller
             'time_in' => $request->input('time_in'), 
             'time_out' => $request->input('time_out'), 
             'amount' => $request->input('amount'), 
+            'amount_per_day' => $request->input('amount_per_day'),
+            'amount_per_hour' => $request->input('amount_per_hour')
         ]);
 
         return response([
@@ -63,7 +65,7 @@ class AvailabilityController extends Controller
         $users = DB::table('availabilities')
             ->select(
                 DB::raw(
-                    "availabilities.file_path, users.id, users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, availabilities.amount, jobs_parent.title as profession, jobs.title as specialty"
+                    "availabilities.file_path, users.id, users.first_name, users.last_name, users.ratings,  availabilities.time_in, availabilities.time_out, availabilities.amount, availabilities.amount_per_day, availabilities.amount_per_hour, jobs_parent.title as profession, jobs.title as specialty"
                 )
             )
             ->join('users', 'users.id', '=','availabilities.user_id')
@@ -99,7 +101,7 @@ class AvailabilityController extends Controller
         $users = DB::table('availabilities')
             ->select(
                 DB::raw(
-                    "users.first_name, users.last_name, availabilities.time_in, availabilities.time_out, availabilities.amount, jobs_parent.title as profession, jobs.title as specialty"
+                    "users.first_name, users.last_name, availabilities.time_in, users.ratings, availabilities.time_out, availabilities.amount, jobs_parent.title as profession, jobs.title as specialty, availabilities.amount_per_day, availabilities.amount_per_hour"
                 )
             )
             ->join('users', 'users.id', '=','availabilities.user_id')

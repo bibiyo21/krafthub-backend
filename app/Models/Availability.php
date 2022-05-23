@@ -15,6 +15,8 @@ class Availability extends Model
         'time_in',
         'time_out',
         'amount',
+        'amount_per_day',
+        'amount_per_hour',
         'file_path'
     ];
 

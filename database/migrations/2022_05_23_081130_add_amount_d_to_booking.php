@@ -13,11 +13,13 @@ class AddAmountDToBooking extends Migration
      */
     public function up()
     {
-   
+       Schema::table('bookings', function (Blueprint $table) {
+            $table->decimal('amount_per_day', 5, 2)->default(0.00);
+        });
 
-        
+
         Schema::table('bookings', function (Blueprint $table) {
-            $table->decimal('amountPerDay', 5, 2)->default(0.00);
+            $table->decimal('amount_per_hour', 5, 2)->default(0.00);
         });
 
 

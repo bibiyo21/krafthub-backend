@@ -29,9 +29,7 @@ class BookingController extends Controller
             'user_id' => auth()->user()->id,
             'eta' => Carbon::parse($request->get('eta'))->format('Y-m-d H:i:s'),
             'additional_info' => $request->get('additional_info'),
-            'amount' => $request->get('amount'),
-            'amount_per_hour' => $request->get('amount_per_hour'),
-            'amount_per_day' => $request->get('amount_per_day'),
+            'amount' => $request->get('amount')
         ]);
 
         return response([

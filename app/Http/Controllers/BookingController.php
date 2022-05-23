@@ -80,7 +80,7 @@ class BookingController extends Controller
         $bookings = DB::table('bookings')
             ->select( 
                 DB::raw(
-                    "bookings.id as bookingId, users.id, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status, bookings.amount, bookings.amount_per_day,bookings.amount_per_hour,bookings.rate,bookings.reason "
+                    "bookings.id as bookingId, users.id, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status, bookings.amount, bookings.reason as cancellation_reason "
                 )
             )
             ->where('bookings.user_id', '=',  auth()->user()->id)
@@ -96,7 +96,7 @@ class BookingController extends Controller
         $bookings = DB::table('bookings')
             ->select( 
                 DB::raw(
-                    "bookings.maker_id as makerId, bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status, bookings.amount, bookings.amount_per_day,bookings.amount_per_hour,bookings.rate,bookings.reason"
+                    "bookings.maker_id as makerId, bookings.id as bookingId, users.first_name, users.last_name, users.ratings, bookings.eta, bookings.additional_info, bookings.status, bookings.amount, bookings.amount_per_day,bookings.amount_per_hour,bookings.rate,bookings.reason"
                 )
             )
             ->join('users', 'users.id', '=','bookings.maker_id');
@@ -111,7 +111,7 @@ class BookingController extends Controller
         $bookings = DB::table('bookings')
             ->select( 
                 DB::raw(
-                    "bookings.id as bookingId, users.first_name, users.last_name, bookings.eta, bookings.additional_info, bookings.status,  bookings.amount, bookings.amount_per_day,bookings.amount_per_hour,bookings.rate,bookings.reason"
+                    "bookings.id as bookingId, users.first_name, users.last_name, users.ratings, bookings.eta, bookings.additional_info, bookings.status,  bookings.amount, bookings.reason as cancellation_reason"
                 )
             )
             ->where('bookings.maker_id', '=',  auth()->user()->id)
